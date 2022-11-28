@@ -71,38 +71,37 @@ namespace WpfApp3
             String[] witam1 = { "VIIII", "IIII", "LXXXX", "XXXX", "DCCCC", "CCCC" };
             String[] witam2 = { "IX", "IV", "XC", "XL", "CM", "CD" };
             
-            for (int i = 0; i < witam2.Length; i++)
+            for (int i = 0; i < witam2.Length; i++)//zamienianie bledow na prawidlowe wartosci
             {
                 znak = znak.Replace(witam1[i], witam2[i]);
             }
-            
-            MessageBox.Show(znak);
+
+            rzymskaText.Text= znak;
         }
-        private string witam(string ciagdozamienienia,string co_zamienic)
+        private string witam(string ciagdozamienienia,string co_zamienic) //profesjonalne usuwanie znaków
         {
             int indexGdzie = ciagdozamienienia.IndexOf(co_zamienic);
             if (indexGdzie!= -1)
             {
                 string doZwrocenia = "";
                 char[] costam = ciagdozamienienia.ToCharArray();
-                for (int i = indexGdzie; i < co_zamienic.Length; i++)
+                for (int i = indexGdzie; i < indexGdzie+co_zamienic.Length; i++)
                 {
-                    costam[i] = '1';
+                    costam[i] = '1';//przykladowa wartosc ktora nie bedzie w tej tablicy
                 }
                 foreach (char el in costam)
                 {
-                    if (Convert.ToString(el) != "1") doZwrocenia += Convert.ToString(el);
+                    if (Convert.ToString(el) != "1") doZwrocenia += Convert.ToString(el); //pomijanie "1" i dodawanie reszty do stringa
                 }
                 return doZwrocenia;
             }
-            else { return ciagdozamienienia; }
+            else return ciagdozamienienia;
         }
         private void romToAra_Click(object sender, RoutedEventArgs e)
         {
             string rom = rzymskaText.Text;
             int suma = 0;
-            String[] romZnaki = {"IX","IV","XC","XL","CM","CD","M","D","C","L","X","V","I"};
-            //zamiana na arabskie WIP
+            String[] romZnaki = {"IX","IV","XC","XL","CM","CD","M","D","C","L","X","V","I"}; // wszystkie mozliwe znaki rzymskie z ktorych mozna zrobic liczby
 
             while(rom !="")
             {
@@ -110,7 +109,7 @@ namespace WpfApp3
                 {
                     if (rom.IndexOf(romZnaki[i]) != -1)
                     {
-                        switch (romZnaki[i])
+                        switch (romZnaki[i]) //szukanie co dodac
                         {
                             case "IX":
                                 suma+=9;
@@ -152,11 +151,11 @@ namespace WpfApp3
                                 suma+=1;
                                 break;
                         }
-                        rom = witam(rom, romZnaki[i]);
+                        rom = witam(rom, romZnaki[i]);//usuwanie wartosci z "rom"
                     }
                 }
             }
-            MessageBox.Show(Convert.ToString(suma));
+            arabskaText.Text = Convert.ToString(suma);
         }
     }
 }

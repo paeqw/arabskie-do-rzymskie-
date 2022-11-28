@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
-        Title="bArToSz CzEcIaK" Height="450" Width="400">
+        Title="Konwerter liczb" Height="250" Width="416">
     <StackPanel>
-        <Label Content="Cyfra Arabska" HorizontalContentAlignment="Center" FontSize="15"/>
+        <Label Content="Cyfra Arabska" HorizontalContentAlignment="Center" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBox x:Name="arabskaText" TextWrapping="Wrap" HorizontalAlignment="Center" Width="120" FontSize="25"/>
         <Label Content="Rzymska" FontSize="15" HorizontalAlignment="Center"/>
         <TextBox x:Name="rzymskaText" TextWrapping="Wrap" Width="120" FontSize="25"/>
-        <StackPanel Height="Auto" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="araToRom" Content="Rzymska &lt;- Arabska" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="20" Click="araToRom_Click"/>
-            <Button x:Name="romToAra" Content="Rzymska -&gt; Arabska" HorizontalAlignment="Right" Margin="32,0,0,0" FontSize="20" Click="romToAra_Click"/>
+        <Label Height="30"></Label>
+        <StackPanel Height="Auto" Orientation="Horizontal">
+            <Button x:Name="araToRom" Content="Arabska -&gt; Rzymska" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="20" Click="araToRom_Click"/>
+            <Button x:Name="romToAra" Content="Rzymska -&gt; Arabska" HorizontalAlignment="Right" Margin="32.92,0,0,0" FontSize="20" Click="romToAra_Click"/>
         </StackPanel>
 
     </StackPanel>
