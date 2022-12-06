@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfApp3
 {
@@ -24,61 +12,67 @@ namespace WpfApp3
         {
             InitializeComponent();
         }
-      
+
         private void araToRom_Click(object sender, RoutedEventArgs e)
         {
-            int ara = Convert.ToInt32(arabskaText.Text);
-            String znak = "";
-            while (ara != 0)
-            {
-                if (ara >= 1000)
+            try { 
+                int ara = Convert.ToInt32(arabskaText.Text);
+                String znak = "";
+                while (ara != 0)
                 {
-                    ara -=1000;
-                    znak += "M";
-                }
-                else if(ara >= 500)
-                {
-                    ara -= 500;
-                    znak += "D";
-                }
-                else if (ara >= 100)
-                {
-                    ara -= 100;
-                    znak += "C";
-                }
-                else if (ara >= 50)
-                {
-                    ara -= 50;
-                    znak += "L";
-                }
-                else if (ara >=10)
-                {
-                    ara-=10;
-                    znak += "X";
-                }
-                else if (ara >= 5)
-                {
-                    ara -= 5;
-                    znak += "V";
-                }
-                else
-                {
-                    ara -= 1;
-                    znak += "I";
-                }
-                
-            }
-            String[] witam1 = { "VIIII", "IIII", "LXXXX", "XXXX", "DCCCC", "CCCC" };
-            String[] witam2 = { "IX", "IV", "XC", "XL", "CM", "CD" };
-            
-            for (int i = 0; i < witam2.Length; i++)//zamienianie bledow na prawidlowe wartosci
-            {
-                znak = znak.Replace(witam1[i], witam2[i]);
-            }
+                    if (ara >= 1000)
+                    {
+                        ara -= 1000;
+                        znak += "M";
+                    }
+                    else if (ara >= 500)
+                    {
+                        ara -= 500;
+                        znak += "D";
+                    }
+                    else if (ara >= 100)
+                    {
+                        ara -= 100;
+                        znak += "C";
+                    }
+                    else if (ara >= 50)
+                    {
+                        ara -= 50;
+                        znak += "L";
+                    }
+                    else if (ara >=10)
+                    {
+                        ara-=10;
+                        znak += "X";
+                    }
+                    else if (ara >= 5)
+                    {
+                        ara -= 5;
+                        znak += "V";
+                    }
+                    else
+                    {
+                        ara -= 1;
+                        znak += "I";
+                    }
 
-            rzymskaText.Text= znak;
+                }
+                String[] witam1 = { "VIIII", "IIII", "LXXXX", "XXXX", "DCCCC", "CCCC" };
+                String[] witam2 = { "IX", "IV", "XC", "XL", "CM", "CD" };
+
+                for (int i = 0; i < witam2.Length; i++)//zamienianie bledow na prawidlowe wartosci
+                {
+                    znak = znak.Replace(witam1[i], witam2[i]);
+                }
+
+                rzymskaText.Text = znak;
+            } catch (FormatException)//debilo odporne zabespieczenie
+            {
+                MessageBox.Show("niepoprawna wartosc", "debil");
+            }            
+            
         }
-        private string witam(string ciagdozamienienia,string co_zamienic) //profesjonalne usuwanie znaków
+        private string witam(string ciagdozamienienia, string co_zamienic) //profesjonalne usuwanie znaków
         {
             int indexGdzie = ciagdozamienienia.IndexOf(co_zamienic);
             if (indexGdzie!= -1)
@@ -101,9 +95,15 @@ namespace WpfApp3
         {
             string rom = rzymskaText.Text;
             int suma = 0;
-            String[] romZnaki = {"IX","IV","XC","XL","CM","CD","M","D","C","L","X","V","I"}; // wszystkie mozliwe znaki rzymskie z ktorych mozna zrobic liczby
+            String[] romZnaki = { "IX", "IV", "XC", "XL", "CM", "CD", "M", "D", "C", "L", "X", "V", "I" }; // wszystkie mozliwe znaki rzymskie z ktorych mozna zrobic liczby
+            bool jestCos = false;
+            foreach(string znaki in romZnaki)
+            {
+                if (rom.IndexOf(znaki) != -1) jestCos = true;
 
-            while(rom !="")
+            }
+            if(!jestCos) MessageBox.Show("niepoprawna wartosc", "debil"); 
+            while (rom !="" && jestCos)
             {
                 for (int i = 0; i < romZnaki.Length; i++)
                 {
